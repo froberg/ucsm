@@ -4,7 +4,7 @@
 
 
 .bgimg2 {
-    background-image: url("../img/bg-img1.jpg");
+    background: url("../img/bg-img1.jpg") no-repeat center center fixed;
     background-repeat: repeat-y;
-    background-size: contain;
+    background-size: cover;
 }

@@ -1,35 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ucsm
 {
-	public struct AlbumDTO
-	{
-        [JsonInclude]
-        public int Id;
-        [JsonInclude]
-        public string Title;
-    }
-
-    public struct AlbumPhotoDTO
-    {
-        [JsonInclude]
-        public int Id;
-        [JsonInclude]
-        public int AlbumId;
-        [JsonInclude]
-        public string Title;
-        [JsonInclude]
-        public string ThumbnailUrl;
-        [JsonInclude]
-        public string Url;
-    }
-
-	public interface IDataStore
+    public interface IDataStore
 	{
         Task<Album> GetAlbum(int id);
         Task<IEnumerable<Album>> GetAlbums();
@@ -37,11 +11,13 @@ namespace ucsm
 
     public class DataStore : IDataStore
 	{
+        private readonly ILogger logger;
         private readonly IHttpClientFactory httpClientFactory;
         private IEnumerable<Album> AllAlbumsCons { get; set; } = new List<Album>();
 
-		public DataStore(IHttpClientFactory httpClientFactory)
+		public DataStore(ILogger<DataStore> logger, IHttpClientFactory httpClientFactory)
 		{
+            this.logger = logger;
             this.httpClientFactory = httpClientFactory;
         }
 
@@ -69,6 +45,9 @@ namespace ucsm
 
         private async Task<IEnumerable<T>> GetCollection<T>(string url)
         {
+            IEnumerable<T>? resultCollection = null;
+            try {
+
             var httpRequestMessage = new HttpRequestMessage(
                 HttpMethod.Get,
                 url
@@ -87,13 +66,13 @@ namespace ucsm
                     PropertyNameCaseInsensitive = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
-                var collection = await JsonSerializer.DeserializeAsync
+                resultCollection = await JsonSerializer.DeserializeAsync
                     <IEnumerable<T>>(contentStream, options);
-
-                return collection;
             }
-
-            return null;
+            } catch(Exception ex) {
+                logger.LogError(ex, ex.Message);
+            }
+            return resultCollection ?? new List<T>();
         }
 
         private Task<IEnumerable<AlbumDTO>> LoadAlbums ()
@@ -106,5 +85,27 @@ namespace ucsm
             return GetCollection<AlbumPhotoDTO>("https://jsonplaceholder.typicode.com/photos");
         }
 	}
+
+	public struct AlbumDTO
+	{
+        [JsonInclude]
+        public int Id;
+        [JsonInclude]
+        public string Title;
+    }
+
+    public struct AlbumPhotoDTO
+    {
+        [JsonInclude]
+        public int Id;
+        [JsonInclude]
+        public int AlbumId;
+        [JsonInclude]
+        public string Title;
+        [JsonInclude]
+        public string ThumbnailUrl;
+        [JsonInclude]
+        public string Url;
+    }
 }
 

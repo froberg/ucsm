@@ -5,10 +5,20 @@
     ViewData["Title"] = "Album";
 }
 
-<div>
-    <h2>@Model.Title</h2>
-    <img src="https://via.placeholder.com/260" alt="Album title"/>
-</div>
-<span>@Model.AlbumId</span>
+<div class="flex mb-4">
+    <div class="w-1/2">
+        <img src="@Model.Album.ImageUrl" alt="@Model.Album.Title" class="px-2"/>
+    </div>
+    <div class="w-1/2 px-6 bg-white bg-opacity-80">
+        <h2 class="text-2xl mb-2">@Model.Album.Title</h2>
+        <p>
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisi commodo, hendrerit lacus quis, aliquam dui. Sed eu justo justo. Etiam fringilla massa eu lacus placerat, vel dapibus tortor viverra. In dolor orci, rhoncus quis mollis nec, pellentesque quis mauris. Sed non egestas ipsum, vel auctor ante. Aenean nec tortor sit amet est ornare efficitur. Curabitur gravida nunc nunc, at faucibus est semper et. Duis interdum quis urna ac egestas.
 
-<p>Use this page to detail your site's privacy policy.</p>
+Vivamus et commodo diam. Sed mollis lorem porttitor, porttitor quam vitae, maximus purus. In nec libero ac urna blandit sodales sed in metus. Morbi laoreet nulla a fringilla ultrices. Etiam euismod, nulla sit amet malesuada fermentum, dolor felis varius sapien, non faucibus lorem massa eget leo. Mauris at aliquet augue, quis dictum libero. Vestibulum ut lacus eget massa sodales feugiat.
+
+Donec rhoncus sed risus nec efficitur. Sed molestie ligula ut sem aliquam posuere. Sed aliquet ornare sem. Vivamus euismod suscipit odio, eget gravida arcu dignissim pharetra. Donec dictum rutrum dui, eu maximus nibh pellentesque id. Nunc in nisi dui. Sed vel leo sit amet quam laoreet porttitor sit amet non risus. Nunc ullamcorper ex nec faucibus lobortis. Sed eget vehicula nisl. Phasellus convallis, eros vitae varius malesuada, velit felis molestie augue, vitae porta ligula lorem nec nunc. Quisque orci velit, sollicitudin sed turpis sit amet, rhoncus suscipit ligula. Pellentesque malesuada justo eget aliquet accumsan.
+
+Sed luctus augue bibendum dui maximus consectetur. Curabitur ultrices sapien sollicitudin, tristique est ac, semper ante. Mauris aliquet congue felis, et accumsan lorem ullamcorper ac. Nam molestie turpis dolor. Aenean cursus nec orci congue commodo. Phasellus eu lacus tristique, efficitur sem vitae, tincidunt ipsum. Sed molestie elit nec aliquet facilisis. 
+        </p>
+    </div>
+</div>

@@ -15,7 +15,7 @@ namespace ucsm.Pages
         [BindProperty(SupportsGet = true)]
         public int AlbumId { get; set; }
 
-        public string? Title { get; set; }
+        public Album Album { get; set; }
 
         public AlbumModel (ILogger<AlbumModel> logger, IDataStore dataStore)
         {
@@ -25,10 +25,7 @@ namespace ucsm.Pages
 
         public void OnGet()
         {
-            var album = dataStore.GetAlbum(AlbumId).Result;
-
-            Title = album.Title;
-
+            Album = dataStore.GetAlbum(AlbumId).Result;
         }
     }
 }

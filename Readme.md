@@ -1,21 +1,15 @@
-﻿### TODO:
-#### P1:
-[ ] Download list of albums
-  - When should this be done?
-  - Should I download on start and use in mem database?
-[x] Show image and title
-[x] make clickable (new page)
-[ ] show more information about album
-[ ] Delete unused code
+﻿# UCSM
 
-[] Build script that runs web and tailwind watch??
-[] Remove / fix all todos
+Browse all the best albums, all day long!
 
-#### P2:
-[] Proper readme file
-[] Layout
-[] Colors (generate a theme)
-[] Deploy to azure
-[] Dark/light
-[] Is it too many albums (Pagination?)
-[] Add tests
+## Run development
+
+### Start dotnet watcher
+`dotnet watch run`
+
+### Build Stylesheets
+`npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwwroot/css/site.css --watch`
+
+## Deploy
+
+Push changes to `deploy_to_azure` to trigger a build and deploy on GitHub.

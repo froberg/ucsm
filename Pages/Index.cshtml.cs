@@ -13,23 +13,20 @@ public class IndexModel : PageModel
     {
         _logger = logger;
         this.dataStore = dataStore;
+
         Albums = new();
-        // TODO: load from interneet
-        Albums.Add(new Album(1, "Title 1"));
-        Albums.Add(new Album(2, "Title 2"));
-        Albums.Add(new Album(3, "Title 3"));
-        Albums.Add(new Album(4, "Title 4"));
-        Albums.Add(new Album(5, "Title 5"));
-        Albums.Add(new Album(6, "Title 6"));
-        Albums.Add(new Album(7, "Title 7"));
-        Albums.Add(new Album(8, "Title 8"));
-        Albums.Add(new Album(9, "Title 9"));
-        Albums.Add(new Album(10, "Title 10"));
     }
 
     public void OnGet()
     {
-        this.Albums.Add(new Album(999, "The number of the cat"));
+
+        // .Result a bit iffy?
+        var albums = dataStore.GetAlbums().Result;
+        foreach (var album in albums)
+        {
+            var albumPhoto = dataStore.GetAlbumPhoto(album.Id).Result;
+            this.Albums.Add(new Album(album.Id, album.Title, albumPhoto.ThumbnailUrl));
+        }
     }
 }
 
@@ -39,11 +36,10 @@ public class Album
     public string Title { get; set; }
     public string ThumbnailUrl { get; set; }
 
-    public Album(int id, string title)
+    public Album(int id, string title, string thumbnail)
     {
         Id = id;
         Title = title;
-        // TODO: get url from photo store.
-        ThumbnailUrl = "https://via.placeholder.com/160";
+        ThumbnailUrl = thumbnail;
     }   
 }

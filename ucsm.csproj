@@ -6,7 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGoup>
-    <Compile Include="Projgram.cs" />
-  </ItemGoup>
+  <ItemGroup>
+    <Content Remove="wwwroot\img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
 </Project>

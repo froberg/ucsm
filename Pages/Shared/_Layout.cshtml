@@ -6,19 +6,25 @@
     <title>@ViewData["Title"] - ucsm</title>
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ucsm.styles.css" asp-append-version="true" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    @* <script src="https://cdn.tailwindcss.com"></script>*@
 </head>
-<body class="container mx-auto px-4">
-    <div class="container">
-        <main role="main" class="pb-3">
+<body class="container bg-neutral-800">
+
+    <div class="container mx-auto px-4">
+        
+        <main role="main" class="p-4 bgimage1 bgimg2">
+            <h1 class="text-3xl font-bold underline bg-white p-3 m-3 inline-block">
+                Music world!
+            </h1>
+
+
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - ucsm 
+            &copy; 2023 - ucsm
         </div>
     </footer>
 
